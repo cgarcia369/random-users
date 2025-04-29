@@ -28,4 +28,6 @@ jobs:
       - name: Deploy to IIS
         shell: cmd
         run: |
+          issreset /stop
           xcopy /s /y .\dist c:\test
+          issreset /start
