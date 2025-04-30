@@ -32,7 +32,7 @@ jobs:
           node -e "
             const fs = require('fs');
             const content = fs.readFileSync('.npmrc', 'utf8');
-            const updated = content.replace(/NPMRC/g, "${{secrets.NPMRC}}");
+            const updated = content.replace(/NPMRC/g, '${{ secrets.NPMRC }}');
             fs.writeFileSync('.npmrc', updated);
           "
 
