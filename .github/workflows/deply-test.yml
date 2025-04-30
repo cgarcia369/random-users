@@ -27,12 +27,14 @@ jobs:
         run: |
           copy ".npmrc.example" ".npmrc"
 
-      - name: Replace secret in file
-        shell: pwsh
+      - name: Replace secret
         run: |
-          (Get-Content .npmrc) | 
-          ForEach-Object {$_ -replace "NPMRC", "${{ secrets.NPMRC }}"} | 
-          Set-Content .npmrc
+          node -e "
+            const fs = require('fs');
+            const content = fs.readFileSync('.npmrc', 'utf8');
+            const updated = content.replace(/NPMRC/g, ${{secrets.NPMRC}});
+            fs.writeFileSync('.npmrc', updated);
+          "
 
       - name: Install dependencies
         run: npm install
