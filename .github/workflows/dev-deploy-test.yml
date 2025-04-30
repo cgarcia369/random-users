@@ -8,7 +8,8 @@ on:
 jobs:
   dev:
     deploy_app:
+      uses: ./.github/workflows/reusableWorkflow.yml@main
       name: run the job
-      uses: ./.github/workflows/reusableWorkflow.yml
+      secrets: inherit
       with:
         environment: "dev"
