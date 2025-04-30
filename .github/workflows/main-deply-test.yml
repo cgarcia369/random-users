@@ -9,6 +9,6 @@ jobs:
   dev:
     deploy_app:
       name: run the job
-      uses: ./.github/workflows/reusableWorkflow.yml
+      uses: ./.github/workflows/reusable.yml
       with:
         environment: "main"
