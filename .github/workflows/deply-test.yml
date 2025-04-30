@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - main
+      - dev
   workflow_dispatch:
-
 jobs:
-  build-and-deploy:
+  dev:
+    strategy:
+      matrix:
+        environment: [dev,main]
     runs-on: self-hosted
-
+    environment: dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,6 +21,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+
+      - name: Copy and rename file
+        shell: cmd
+        run: |
+          copy ".npmrc.example" ".npmrc"
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "NPMRC"
+          replace: ${{ secrets.NPMRC }}
+          regex: false
+          include: '.npmrc'
 
       - name: Install dependencies
         run: npm install
