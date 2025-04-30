@@ -6,6 +6,8 @@ on:
       environment:
         required: true
         type: string
+env:
+  VITE_TEST: ${{ vars.VITE_TEST }}
 jobs:
   deploy_app:
     name: Deploy App
