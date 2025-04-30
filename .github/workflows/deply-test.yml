@@ -27,13 +27,12 @@ jobs:
         run: |
           copy ".npmrc.example" ".npmrc"
 
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
-        with:
-          find: "NPMRC"
-          replace: ${{ secrets.NPMRC }}
-          regex: false
-          include: '.npmrc'
+      - name: Replace secret in file
+        shell: pwsh
+        run: |
+          (Get-Content .npmrc) | 
+          ForEach-Object {$_ -replace "NPMRC", "${{ secrets.NPMRC }}"} | 
+          Set-Content .npmrc
 
       - name: Install dependencies
         run: npm install
