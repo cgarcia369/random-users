@@ -1,10 +1,7 @@
-name: Build and Deploy Next.js to IIS
+name: Build and Deploy
 
 on:
   push:
-    branches:
-      - main
-      - dev
   workflow_dispatch:
 jobs:
   dev:
@@ -39,7 +36,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Next.js app
+      - name: Build app
         run: npm run build
 
       - name: Deploy to IIS
