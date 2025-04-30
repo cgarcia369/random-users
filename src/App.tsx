@@ -13,6 +13,7 @@ const users = text
       company: splitUser[1].toUpperCase()
     };
   });
+console.log(process.env.VITE_TEST);
 function App() {
   return (
     <>
