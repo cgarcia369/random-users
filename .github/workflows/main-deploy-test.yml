@@ -6,10 +6,9 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  dev:
-    deploy_app:
-      uses: ./.github/workflows/reusable.yml
-      name: run the job
-      secrets: inherit
-      with:
-        environment: "main"
+  main:
+    uses: ./.github/workflows/reusable.yml
+    name: run the job
+    secrets: inherit
+    with:
+      environment: "main"
