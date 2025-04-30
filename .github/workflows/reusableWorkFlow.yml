@@ -1,15 +1,15 @@
-name: Build and Deploy
+name: Reusable CI Workflow
 
 on:
-  push:
-  workflow_dispatch:
-jobs:
-  dev:
-    strategy:
-      matrix:
-        environment: [dev,main]
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+  deploy_app:
+    name: Deploy App
+    environment: ${{ inputs.environment}}
     runs-on: self-hosted
-    environment: dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

@@ -1,0 +1,14 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  dev:
+    deploy_app:
+      name: run the job
+      uses: ./.github/workflows/reusableWorkflow.yml
+      with:
+        environment: "main"
